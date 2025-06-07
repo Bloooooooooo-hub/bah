@@ -58,8 +58,9 @@
       border-radius: 32px;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      pointer-events: auto;
+      pointer-events: none;
       z-index: 1000;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -74,52 +75,13 @@
     <span id="dyn-text">Bah Lo&iuml;c-Emmanuel</span>
 
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
-      animation: shake-uniform 3s linear infinite;
+      animation: shake-uniform 0.5s linear infinite;
     }
     @keyframes shake-uniform {
-      0%,80%,100% { transform: translateX(-50%); }
-      83% { transform: translateX(calc(-50% - 2px)); }
-      88% { transform: translateX(calc(-50% + 2px)); }
-      93% { transform: translateX(calc(-50% - 2px)); }
-    }
-
-    #dyn-menu {
-      display: flex;
-
-      flex-direction: column;
-      gap: 4px;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-    }
-
-    #dyn-island:hover #dyn-menu {
-      max-height: 200px;
-      opacity: 1;
-=======
-      gap: 8px;
-      opacity: 0;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      white-space: nowrap;
-    }
-
-    #dyn-island:hover #dyn-menu {
-      opacity: 1;
-      transform: scaleX(1);
-
-    }
-
-    #dyn-menu a {
-      color: #fff;
-      text-decoration: none;
-      padding: 4px 8px;
-    }
-
-    #dyn-menu a:hover {
-      text-decoration: underline;
+      0%,100% { transform: translateX(-50%); }
+      25% { transform: translateX(calc(-50% - 2px)); }
+      50% { transform: translateX(calc(-50% + 2px)); }
+      75% { transform: translateX(calc(-50% - 2px)); }
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
@@ -137,18 +99,42 @@
       transform: scale(1.05);
       transition: transform 0.5s ease;
     }
+    #dyn-island {
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        max-height: 60px;
+      }
+      
+      #dyn-island:hover {
+        max-height: 160px;
+      }
+      
+      #dyn-island .menu {
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        gap: 16px;
+        margin-top: 10px;
+        justify-content: center;
+      }
+      
+      #dyn-island:hover .menu {
+        opacity: 1;
+      }
+      
   </style>
 </head>
 <body>
-  <div id="dyn-island">
-    <span id="dyn-text">Bah Lo&iuml;c-Emmanuel / Section 1</span>
-    <nav id="dyn-menu">
-      <a href="#">Bio</a>
-      <a href="#">Parcours</a>
-      <a href="#">Passions</a>
-      <a href="#">Téléchargement</a>
-    </nav>
-  </div>
+    <div id="dyn-island">
+        Bah Loïc-Emmanuel / Présente
+        <div class="menu">
+          <a href="#">Bio</a>
+          <a href="#">Parcours</a>
+          <a href="#">Passions</a>
+          <a href="#">Téléchargement</a>
+        </div>
+      </div>
+
   <section class="section" data-text="Présente" data-color="">Bonjour & Bienvenue </section>
 
   <section class="section" data-text="& son Parcours" data-color="">Section 2</section>
@@ -159,7 +145,6 @@
 
   <script>
     const dynIsland = document.getElementById('dyn-island');
-    const dynText = document.getElementById('dyn-text');
     const sections = document.querySelectorAll('.section');
     const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
@@ -181,7 +166,7 @@
       const text = section.dataset.text;
       dynIsland.classList.add('shrink');
       setTimeout(() => {
-        dynText.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        dynIsland.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
         dynIsland.style.backgroundColor = '';
         dynIsland.classList.remove('shrink');
       }, 400);
