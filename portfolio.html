@@ -20,7 +20,17 @@
       align-items: center;
       font-size: 2rem;
     }
-    .section:nth-child(1) { background: #1E88E5; }
+    .section:nth-child(1) {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1728750002011-e81fc6a631a9?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+    }
+    .section:nth-child(1)::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
     .section:nth-child(2) { background: #43A047; }
     .section:nth-child(3) { background: #F4511E; }
     #island {
@@ -36,10 +46,10 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       pointer-events: none;
       z-index: 1000;
-      transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
     }
     #island.shrink {
-      transform: translateX(-50%) scale(0.5);
+      transform: translateX(-50%) scale(0.3);
       opacity: 0.5;
     }
   </style>
@@ -69,7 +79,7 @@
         island.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
         island.style.backgroundColor = '#000';
         island.classList.remove('shrink');
-      }, 200);
+      }, 400);
     }
   </script>
 </body>
