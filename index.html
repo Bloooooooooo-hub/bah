@@ -8,33 +8,43 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: #000;
+
       color: #fff;
       font-family: Arial, sans-serif;
     }
     .section {
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-    }
-    .section:nth-child(1) {
-      background-image: url("https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true");
-    }
-
-    .section:nth-child(2) {
-      background-image: url("https://source.unsplash.com/random/1600x900/?workspace");
-    }
-
-    .section:nth-child(3) {
-      background-image: url("https://source.unsplash.com/random/1600x900/?technology");
-    }
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      }
+      
+      /* Section 1 (correctement ciblée) */
+      .section:nth-of-type(1) {
+        background-image: url("https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true");
+      }
+      
+      /* Section 2 */
+      .section:nth-of-type(2) {
+        background-image: url("ba.jpg");
+      }
+      
+      /* Section 3 */
+      .section:nth-of-type(3) {
+        background-image: url("aa.jpg");
+      }
+      
+      /* Section 4 */
+      .section:nth-of-type(4) {
+        background-image: url("ba.jpg");
+      }
+      
 
     #dyn-island {
       position: fixed;
@@ -47,16 +57,11 @@
       border-radius: 32px;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      pointer-events: auto;
+      pointer-events: none;
       z-index: 1000;
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
       animation: shake-uniform 0.5s linear infinite;
     }
-
-    #dyn-island ul { list-style: none; padding: 8px 0; margin: 0; position: absolute; left: 50%; top: 100%; transform: translate(-50%, -10px); background: rgba(0,0,0,0.8); border-radius: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
-    #dyn-island:hover ul { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
-    #dyn-island ul li a { display: block; padding: 6px 16px; color: #fff; text-decoration: none; }
-    #dyn-island ul li a:hover { background: rgba(255,255,255,0.1); }
     @keyframes shake-uniform {
       0%,100% { transform: translateX(-50%); }
       25% { transform: translateX(calc(-50% - 2px)); }
@@ -66,21 +71,10 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-    #separator {
-      height: 100px;
-      width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255,255,255,0.3);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
+    
+    
+
+    
     #dyn-island.shrink {
       transform: translateX(-50%) scale(0.3);
       opacity: 0.5;
@@ -93,22 +87,17 @@
   </style>
 </head>
 <body>
-  <div id="dyn-island">
-    <span id="dyn-text">Bah Lo&iuml;c-Emmanuel / Section 1</span>
-    <ul id="dyn-menu">
-      <li><a href="#">Bio</a></li>
-      <li><a href="#">Parcours</a></li>
-      <li><a href="#">Passions</a></li>
-      <li><a href="#">Téléchargement</a></li>
-    </ul>
-  </div>
-  <section class="section" data-text="Section 1" data-color="">Section 1</section>
+  <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <section class="section" data-text="Présente" data-color="">Bonjour & Bienvenue </section>
 
-  <section class="section" data-text="Section 2" data-color="">Section 2</section>
-  <section class="section" data-text="Section 3" data-color="">Section 3</section>
+  <section class="section" data-text="& son Parcours" data-color="">Section 2</section>
+
+  <section class="section" data-text="& ses infos " data-color="">Section 3</section>
+  <section class="section" data-text="& son Parcours" data-color="">Section 4</section>
+
+
   <script>
     const dynIsland = document.getElementById('dyn-island');
-    const dynText = document.getElementById('dyn-text');
     const sections = document.querySelectorAll('.section');
     const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
@@ -130,8 +119,8 @@
       const text = section.dataset.text;
       dynIsland.classList.add('shrink');
       setTimeout(() => {
-        dynText.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
-        dynIsland.style.backgroundColor = '#000';
+        dynIsland.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        dynIsland.style.backgroundColor = '';
         dynIsland.classList.remove('shrink');
       }, 400);
     }
