@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Island Demo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #cfa0a0;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    .section {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+    .section:nth-child(1) {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1728750002011-e81fc6a631a9?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+    }
+    .section:nth-child(1)::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
+    .section:nth-child(2) { background: #38893e; }
+    .section:nth-child(3) { background: #8645322b; }
+    #island {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 32px;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      pointer-events: none;
+      z-index: 1000;
+      transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
+    }
+    @keyframes shake {
+      0% { transform: translateX(-50%) translateY(0); }
+      25% { transform: translateX(calc(-50% - 2px)) translateY(0); }
+      50% { transform: translateX(calc(-50% + 2px)) translateY(0); }
+      75% { transform: translateX(calc(-50% - 2px)) translateY(0); }
+      100% { transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    #island.shake {
+      animation: shake 0.4s;
+    }
+    #separator {
+      height: 100px;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    #island.shrink {
+      transform: translateX(-50%) scale(0.3);
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <section class="section" data-text="Section 1" data-color="#1E88E5">Section 1</section>
+
+  <section class="section" data-text="Section 2" data-color="#43A047">Section 2</section>
+  <section class="section" data-text="Section 3" data-color="#F4511E">Section 3</section>
+  <script>
+    const island = document.getElementById('island');
+    const sections = document.querySelectorAll('.section');
+    const options = { threshold: 0.6 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          changeIsland(entry.target);
+        }
+      });
+    }, options);
+    sections.forEach(sec => observer.observe(sec));
+    setInterval(() => {
+      island.classList.add('shake');
+      setTimeout(() => island.classList.remove('shake'), 400);
+    }, 2000);
+
+
+    function changeIsland(section) {
+      const text = section.dataset.text;
+      island.classList.add('shrink');
+      setTimeout(() => {
+        island.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        island.style.backgroundColor = '#000';
+        island.classList.remove('shrink');
+      }, 400);
+    }
+  </script>
+</body>
+</html>
