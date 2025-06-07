@@ -60,8 +60,10 @@
       pointer-events: auto;
       z-index: 1000;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      overflow: hidden;
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
       animation: shake-uniform 3s linear infinite;
     }
@@ -74,17 +76,17 @@
 
     #dyn-menu {
       display: flex;
-      gap: 8px;
+      flex-direction: column;
+      gap: 4px;
+      max-height: 0;
       opacity: 0;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      white-space: nowrap;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
     }
 
     #dyn-island:hover #dyn-menu {
+      max-height: 200px;
       opacity: 1;
-      transform: scaleX(1);
     }
 
     #dyn-menu a {
