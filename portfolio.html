@@ -119,7 +119,7 @@
   </style>
 </head>
 <body>
-  <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1
+  <div id="dyn-island"><span id="dyn-text">Bah Lo&iuml;c-Emmanuel / Section 1</span>
     <div id="dyn-menu">
       <a href="#">Bio</a>
       <a href="#">Parcours</a>
@@ -137,6 +137,7 @@
 
   <script>
     const dynIsland = document.getElementById('dyn-island');
+    const dynText = document.getElementById('dyn-text');
     const sections = document.querySelectorAll('.section');
     const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
@@ -158,7 +159,7 @@
       const text = section.dataset.text;
       dynIsland.classList.add('shrink');
       setTimeout(() => {
-        dynIsland.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        dynText.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
         dynIsland.style.backgroundColor = '';
         dynIsland.classList.remove('shrink');
       }, 400);
