@@ -8,7 +8,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      background:;
+      background: #000;
       color: #fff;
       font-family: Arial, sans-serif;
     }
@@ -19,17 +19,22 @@
       justify-content: center;
       align-items: center;
       font-size: 2rem;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
     }
     .section:nth-child(1) {
-      position: relative;
-      background: url("https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true") center/cover no-repeat;
+      background-image: url("https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true");
     }
 
-    .section:nth-child(2) { background: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0") center/cover no-repeat; }
-    .section:nth-child(3) { background: url("https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0") center/cover no-repeat; }
+    .section:nth-child(2) {
+      background-image: url("https://source.unsplash.com/random/1600x900/?workspace");
+    }
 
-    .section:nth-child(2) { background: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0") center/cover no-repeat;  }
-    .section:nth-child(3) { background: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0") center/cover no-repeat;  }
+    .section:nth-child(3) {
+      background-image: url("https://source.unsplash.com/random/1600x900/?technology");
+    }
 
     #dyn-island {
       position: fixed;
@@ -42,11 +47,16 @@
       border-radius: 32px;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      pointer-events: none;
+      pointer-events: auto;
       z-index: 1000;
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
       animation: shake-uniform 0.5s linear infinite;
     }
+
+    #dyn-island ul { list-style: none; padding: 8px 0; margin: 0; position: absolute; left: 50%; top: 100%; transform: translate(-50%, -10px); background: rgba(0,0,0,0.8); border-radius: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
+    #dyn-island:hover ul { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+    #dyn-island ul li a { display: block; padding: 6px 16px; color: #fff; text-decoration: none; }
+    #dyn-island ul li a:hover { background: rgba(255,255,255,0.1); }
     @keyframes shake-uniform {
       0%,100% { transform: translateX(-50%); }
       25% { transform: translateX(calc(-50% - 2px)); }
@@ -83,13 +93,22 @@
   </style>
 </head>
 <body>
-  <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <div id="dyn-island">
+    <span id="dyn-text">Bah Lo&iuml;c-Emmanuel / Section 1</span>
+    <ul id="dyn-menu">
+      <li><a href="#">Bio</a></li>
+      <li><a href="#">Parcours</a></li>
+      <li><a href="#">Passions</a></li>
+      <li><a href="#">Téléchargement</a></li>
+    </ul>
+  </div>
   <section class="section" data-text="Section 1" data-color="">Section 1</section>
 
   <section class="section" data-text="Section 2" data-color="">Section 2</section>
   <section class="section" data-text="Section 3" data-color="">Section 3</section>
   <script>
     const dynIsland = document.getElementById('dyn-island');
+    const dynText = document.getElementById('dyn-text');
     const sections = document.querySelectorAll('.section');
     const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
@@ -111,7 +130,7 @@
       const text = section.dataset.text;
       dynIsland.classList.add('shrink');
       setTimeout(() => {
-        dynIsland.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        dynText.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
         dynIsland.style.backgroundColor = '#000';
         dynIsland.classList.remove('shrink');
       }, 400);

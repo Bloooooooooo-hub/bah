@@ -19,21 +19,23 @@
       justify-content: center;
       align-items: center;
       font-size: 2rem;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
     }
     .section:nth-child(1) {
-      position: relative;
-      background: url('https://images.unsplash.com/photo-1728750002011-e81fc6a631a9?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+      background-image: url('https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true');
     }
-    .section:nth-child(1)::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      pointer-events: none;
+
+    .section:nth-child(2) {
+      background-image: url('https://source.unsplash.com/random/1600x900/?workspace');
     }
-    .section:nth-child(2) { background: #43A047; }
-    .section:nth-child(3) { background: #F4511E; }
-    #island {
+
+    .section:nth-child(3) {
+      background-image: url('https://source.unsplash.com/random/1600x900/?technology');
+    }
+    #dyn-island {
       position: fixed;
       top: 20px;
       left: 50%;
@@ -44,7 +46,7 @@
       border-radius: 32px;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      pointer-events: none;
+      pointer-events: auto;
       z-index: 1000;
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
     }
@@ -59,8 +61,40 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-    #island.shake {
+    #dyn-island.shake {
       animation: shake 0.6s;
+    }
+
+    #dyn-island ul {
+      list-style: none;
+      padding: 8px 0;
+      margin: 0;
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translate(-50%, -10px);
+      background: rgba(0,0,0,0.8);
+      border-radius: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    #dyn-island:hover ul {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
+    }
+
+    #dyn-island ul li a {
+      display: block;
+      padding: 6px 16px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    #dyn-island ul li a:hover {
+      background: rgba(255,255,255,0.1);
     }
     #separator {
       height: 100px;
@@ -77,20 +111,29 @@
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
-    #island.shrink {
+    #dyn-island.shrink {
       transform: translateX(-50%) scale(0.3);
       opacity: 0.5;
     }
   </style>
 </head>
 <body>
-  <div id="island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <div id="dyn-island">
+    <span id="dyn-text">Bah Lo&iuml;c-Emmanuel / Section 1</span>
+    <ul id="dyn-menu">
+      <li><a href="#">Bio</a></li>
+      <li><a href="#">Parcours</a></li>
+      <li><a href="#">Passions</a></li>
+      <li><a href="#">Téléchargement</a></li>
+    </ul>
+  </div>
   <section class="section" data-text="Section 1" data-color="#1E88E5">Section 1</section>
   <div id="separator"><div class="spinner"></div></div>
   <section class="section" data-text="Section 2" data-color="#43A047">Section 2</section>
   <section class="section" data-text="Section 3" data-color="#F4511E">Section 3</section>
   <script>
-    const island = document.getElementById('island');
+    const dynIsland = document.getElementById('dyn-island');
+    const dynText = document.getElementById('dyn-text');
     const sections = document.querySelectorAll('.section');
     const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
@@ -103,17 +146,17 @@
     sections.forEach(sec => observer.observe(sec));
 
     setInterval(() => {
-      island.classList.add('shake');
-      setTimeout(() => island.classList.remove('shake'), 600);
+      dynIsland.classList.add('shake');
+      setTimeout(() => dynIsland.classList.remove('shake'), 600);
     }, 2000);
 
     function changeIsland(section) {
       const text = section.dataset.text;
-      island.classList.add('shrink');
+      dynIsland.classList.add('shrink');
       setTimeout(() => {
-        island.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
-        island.style.backgroundColor = '#000';
-        island.classList.remove('shrink');
+        dynText.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        dynIsland.style.backgroundColor = '#000';
+        dynIsland.classList.remove('shrink');
       }, 400);
     }
   </script>
