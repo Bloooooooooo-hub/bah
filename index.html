@@ -33,7 +33,7 @@
     }
     .section:nth-child(2) { background: #38893e; }
     .section:nth-child(3) { background: #8645322b; }
-    #island {
+    #dyn-island {
       position: fixed;
       top: 20px;
       left: 50%;
@@ -47,19 +47,16 @@
       pointer-events: none;
       z-index: 1000;
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
+      animation: shake-uniform 0.5s linear infinite;
     }
-    @keyframes shake {
-      0% { transform: translateX(-50%) translateY(0); }
-      25% { transform: translateX(calc(-50% - 2px)) translateY(0); }
-      50% { transform: translateX(calc(-50% + 2px)) translateY(0); }
-      75% { transform: translateX(calc(-50% - 2px)) translateY(0); }
-      100% { transform: translateX(-50%) translateY(0); }
+    @keyframes shake-uniform {
+      0%,100% { transform: translateX(-50%); }
+      25% { transform: translateX(calc(-50% - 2px)); }
+      50% { transform: translateX(calc(-50% + 2px)); }
+      75% { transform: translateX(calc(-50% - 2px)); }
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
-    }
-    #island.shake {
-      animation: shake 0.4s;
     }
     #separator {
       height: 100px;
@@ -76,43 +73,49 @@
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
-    #island.shrink {
+    #dyn-island.shrink {
       transform: translateX(-50%) scale(0.3);
       opacity: 0.5;
+    }
+
+    body.zoom {
+      transform: scale(1.05);
+      transition: transform 0.5s ease;
     }
   </style>
 </head>
 <body>
-  <div id="island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
   <section class="section" data-text="Section 1" data-color="#1E88E5">Section 1</section>
 
   <section class="section" data-text="Section 2" data-color="#43A047">Section 2</section>
   <section class="section" data-text="Section 3" data-color="#F4511E">Section 3</section>
   <script>
-    const island = document.getElementById('island');
+    const dynIsland = document.getElementById('dyn-island');
     const sections = document.querySelectorAll('.section');
     const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           changeIsland(entry.target);
+          triggerZoom();
         }
       });
     }, options);
     sections.forEach(sec => observer.observe(sec));
-    setInterval(() => {
-      island.classList.add('shake');
-      setTimeout(() => island.classList.remove('shake'), 400);
-    }, 2000);
 
+    function triggerZoom() {
+      document.body.classList.add('zoom');
+      setTimeout(() => document.body.classList.remove('zoom'), 500);
+    }
 
     function changeIsland(section) {
       const text = section.dataset.text;
-      island.classList.add('shrink');
+      dynIsland.classList.add('shrink');
       setTimeout(() => {
-        island.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
-        island.style.backgroundColor = '#000';
-        island.classList.remove('shrink');
+        dynIsland.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        dynIsland.style.backgroundColor = '#000';
+        dynIsland.classList.remove('shrink');
       }, 400);
     }
   </script>
