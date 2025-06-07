@@ -64,6 +64,10 @@
       align-items: center;
       gap: 8px;
       overflow: hidden;
+
+      align-items: center;
+      gap: 12px;
+
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
       animation: shake-uniform 3s linear infinite;
     }
@@ -76,6 +80,7 @@
 
     #dyn-menu {
       display: flex;
+
       flex-direction: column;
       gap: 4px;
       max-height: 0;
@@ -87,6 +92,19 @@
     #dyn-island:hover #dyn-menu {
       max-height: 200px;
       opacity: 1;
+=======
+      gap: 8px;
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+
+    #dyn-island:hover #dyn-menu {
+      opacity: 1;
+      transform: scaleX(1);
+
     }
 
     #dyn-menu a {
