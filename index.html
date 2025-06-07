@@ -57,10 +57,42 @@
       border-radius: 32px;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      pointer-events: none;
+      pointer-events: auto;
       z-index: 1000;
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
       animation: shake-uniform 0.5s linear infinite;
+    }
+
+    #dyn-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translate(-50%, -10px) scale(0.95);
+      background: rgba(0, 0, 0, 0.85);
+      padding: 8px 12px;
+      border-radius: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+
+    #dyn-island:hover #dyn-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, 0) scale(1);
+    }
+
+    #dyn-menu a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 4px 8px;
+    }
+
+    #dyn-menu a:hover {
+      text-decoration: underline;
     }
     @keyframes shake-uniform {
       0%,100% { transform: translateX(-50%); }
@@ -87,7 +119,14 @@
   </style>
 </head>
 <body>
-  <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1
+    <div id="dyn-menu">
+      <a href="#">Bio</a>
+      <a href="#">Parcours</a>
+      <a href="#">Passions</a>
+      <a href="#">Téléchargement</a>
+    </div>
+  </div>
   <section class="section" data-text="Présente" data-color="">Bonjour & Bienvenue </section>
 
   <section class="section" data-text="& son Parcours" data-color="">Section 2</section>
