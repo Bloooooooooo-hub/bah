@@ -8,125 +8,139 @@
     html, body {
       margin: 0;
       padding: 0;
-
-      color: #fff;
       font-family: Arial, sans-serif;
+      color: #fff;
     }
+
     .section {
-        height: 100vh;
-        width: 100vw;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    }
+
+    .section:nth-of-type(1) {
+      background-image: url("https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true");
+    }
+    .section:nth-of-type(2) { background-image: url("ba.jpg"); }
+    .section:nth-of-type(3) { background-image: url("aa.jpg"); }
+    .section:nth-of-type(4) { background-image: url("ba.jpg"); }
+
+
+    #dyn-island {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: transparent;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 2s ease;
+      }
+      #dyn-island .header {
+        background: #000;
+        color: #fff;
+        font-size: 1rem;
+        border-radius: 32px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        padding: 12px 24px;
+        white-space: nowrap;
+        transition: all 2s ease;
+        transform-origin: center;
+        width: 160px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 2rem;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        visibility: visible;
+        opacity: 1;
       }
-      
-      /* Section 1 (correctement ciblée) */
-      .section:nth-of-type(1) {
-        background-image: url("https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true");
-      }
-      
-      /* Section 2 */
-      .section:nth-of-type(2) {
-        background-image: url("ba.jpg");
-      }
-      
-      /* Section 3 */
-      .section:nth-of-type(3) {
-        background-image: url("aa.jpg");
-      }
-      
-      /* Section 4 */
-      .section:nth-of-type(4) {
-        background-image: url("ba.jpg");
-      }
-      
 
-    #dyn-island {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #000;
-      color: #fff;
-      width: 220px;
-      height: 32px;
-      border-radius: 32px;
-      font-size: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      pointer-events: none;
-      z-index: 1000;
+      #dyn-island:hover .header {
+        width: 145px; /* réduit en largeur uniquement */
+      }
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      overflow: hidden;
-      transition: width 2s ease, height 2s ease;
+    
+     
     #dyn-island:hover {
-      width: 300px;
-      height: 160px;
-    }
-      transition: max-height 2s ease, opacity 0.5s ease;
-    <span id="dyn-text">Bah Lo&iuml;c-Emmanuel</span>
+  border-bottom-left-radius: 70px;
+  border-bottom-right-radius: 50px;
+  padding-bottom: 55px;
+ 
+}
 
-      transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
-      animation: shake-uniform 0.5s linear infinite;
-    }
-    @keyframes shake-uniform {
-      0%,100% { transform: translateX(-50%); }
-      25% { transform: translateX(calc(-50% - 2px)); }
-      50% { transform: translateX(calc(-50% + 2px)); }
-      75% { transform: translateX(calc(-50% - 2px)); }
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    
+#dyn-island .menu {
+  background: #000;
+  color: #fff;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  border-top-right-radius: 32px;
+  border-top-left-radius: 32px;
+  opacity: 0;
+  display: flex;
+  flex-direction: row; /* affichage en ligne */
+  gap: 24px; /* espacement entre les éléments */
+  padding: 24px 48px;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 300px; /* plus large que l'entête */
+  transform: translateY(-10px) scaleY(0)  ;
+  transition: opacity 1, 2s ease, transform 2s ease;
+  animation: slideInFromtop 0.5s ease-out forwards ;
 
-    
-    #dyn-island.shrink {
-      transform: translateX(-50%) scale(0.3);
-      opacity: 0.5;
+  opacity: 1; 
+}
+
+#dyn-island:hover .menu {
+    opacity: 1;
+    transform: scaleY(1);
+    animation: appear 0.5s ease-out forwards;
+  }
+  
+
+  #dyn-island .menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+
+      #dyn-island .menu a:hover {
+        color: #ccc;
+      }
+      
+      
+
+
+    @keyframes shake {
+      0%,100% { transform: translateX(-50%) }
+      25% { transform: translateX(calc(-50% - 2px)) }
+      50% { transform: translateX(calc(-50% + 2px)) }
+      75% { transform: translateX(calc(-50% - 1px)) }
+    }
+
+    .shaking {
+      animation: shake 0.4s ease;
     }
 
     body.zoom {
       transform: scale(1.05);
       transition: transform 0.5s ease;
     }
-    #dyn-island {
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-        max-height: 60px;
-      }
-      
-      #dyn-island:hover {
-        max-height: 160px;
-      }
-      
-      #dyn-island .menu {
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        display: flex;
-        gap: 16px;
-        margin-top: 10px;
-        justify-content: center;
-      }
-      
-      #dyn-island:hover .menu {
-        opacity: 1;
-      }
-      
   </style>
 </head>
 <body>
     <div id="dyn-island">
-        Bah Loïc-Emmanuel / Présente
+        <div class="header">Bah Loïc-Emmanuel</div>
         <div class="menu">
           <a href="#">Bio</a>
           <a href="#">Parcours</a>
@@ -134,43 +148,32 @@
           <a href="#">Téléchargement</a>
         </div>
       </div>
+      
 
-  <section class="section" data-text="Présente" data-color="">Bonjour & Bienvenue </section>
-
-  <section class="section" data-text="& son Parcours" data-color="">Section 2</section>
-
-  <section class="section" data-text="& ses infos " data-color="">Section 3</section>
-  <section class="section" data-text="& son Parcours" data-color="">Section 4</section>
-
+  <section class="section" data-text="">Bonjour & Bienvenue</section>
+  <section class="section" data-text="">Section 2</section>
+  <section class="section" data-text="">Section 3</section>
+  <section class="section" data-text="">Section 4</section>
 
   <script>
     const dynIsland = document.getElementById('dyn-island');
+    const sectionLabel = document.getElementById('section-label');
     const sections = document.querySelectorAll('.section');
-    const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          changeIsland(entry.target);
-          triggerZoom();
+          const text = entry.target.dataset.text;
+          sectionLabel.textContent = text;
         }
       });
-    }, options);
+    }, { threshold: 0.6 });
     sections.forEach(sec => observer.observe(sec));
 
-    function triggerZoom() {
-      document.body.classList.add('zoom');
-      setTimeout(() => document.body.classList.remove('zoom'), 500);
-    }
-
-    function changeIsland(section) {
-      const text = section.dataset.text;
-      dynIsland.classList.add('shrink');
-      setTimeout(() => {
-        dynIsland.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
-        dynIsland.style.backgroundColor = '';
-        dynIsland.classList.remove('shrink');
-      }, 400);
-    }
+    // tremblement toutes les 3 secondes
+    setInterval(() => {
+      dynIsland.classList.add('shaking');
+      setTimeout(() => dynIsland.classList.remove('shaking'), 400);
+    }, 3000);
   </script>
 </body>
 </html>
