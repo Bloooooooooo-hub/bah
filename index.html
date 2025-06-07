@@ -13,7 +13,7 @@
       font-family: Arial, sans-serif;
     }
     .section {
-        height: 100vh;
+        height: 200vh;
         width: 100vw;
         display: flex;
         justify-content: center;
@@ -27,7 +27,7 @@
       
       /* Section 1 (correctement ciblée) */
       .section:nth-of-type(1) {
-        background-image: url("https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true");
+         background-image: url('alex-gruber-DiPzOgyqcsA-unsplash.jpg');
       }
       
       /* Section 2 */
@@ -37,12 +37,12 @@
       
       /* Section 3 */
       .section:nth-of-type(3) {
-        background-image: url("aa.jpg");
+        background-image: url("ca.jpg");
       }
       
       /* Section 4 */
       .section:nth-of-type(4) {
-        background-image: url("ba.jpg");
+        background-image: url("cote-d-ivoire-orange-inaugure-son-nouveau-siege-social-d-un-cout-de-40-mill_ptjlbdfzpd-2.jpg");
       }
       
 
@@ -53,39 +53,35 @@
       transform: translateX(-50%);
       background: #000;
       color: #fff;
-      width: 220px;
-      height: 32px;
+      padding: 10px 24px;
       border-radius: 32px;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       pointer-events: auto;
       z-index: 1000;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      overflow: hidden;
-
-      transition: width 2s ease, height 2s ease;
-      animation: shake-uniform 3s linear infinite;
-    }
-    #dyn-island:hover {
-      width: 300px;
-      height: 160px;
-
-
       align-items: center;
       gap: 12px;
-
+      overflow: hidden;
+      white-space: nowrap;
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
-      animation: shake-uniform 3s linear infinite;
 
-    }
+      gap: 12px;
+      pointer-events: none;
+      max-width: 0;
+      transition: opacity 0.3s ease, max-width 0.4s ease;
+      pointer-events: auto;
+      max-width: 320px;
+      font-size: 0.9rem;
     @keyframes shake-uniform {
       0%,80%,100% { transform: translateX(-50%); }
       83% { transform: translateX(calc(-50% - 2px)); }
       88% { transform: translateX(calc(-50% + 2px)); }
       93% { transform: translateX(calc(-50% - 2px)); }
+    }
+  <div id="dyn-island"><span id="dyn-text">Bah Lo&iuml;c-Emmanuel / Section 1</span>
+    <div id="dyn-menu">
+    </div>
     }
 
     #dyn-menu {
