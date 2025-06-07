@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Island Demo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    .section {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+    .section:nth-child(1) { background: #1E88E5; }
+    .section:nth-child(2) { background: #43A047; }
+    .section:nth-child(3) { background: #F4511E; }
+    #island {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #000;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 32px;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      pointer-events: none;
+      z-index: 1000;
+      transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+    }
+    #island.shrink {
+      transform: translateX(-50%) scale(0.5);
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <section class="section" data-text="Section 1" data-color="#1E88E5">Section 1</section>
+  <section class="section" data-text="Section 2" data-color="#43A047">Section 2</section>
+  <section class="section" data-text="Section 3" data-color="#F4511E">Section 3</section>
+  <script>
+    const island = document.getElementById('island');
+    const sections = document.querySelectorAll('.section');
+    const options = { threshold: 0.6 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          changeIsland(entry.target);
+        }
+      });
+    }, options);
+    sections.forEach(sec => observer.observe(sec));
+
+    function changeIsland(section) {
+      const text = section.dataset.text;
+      island.classList.add('shrink');
+      setTimeout(() => {
+        island.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        island.style.backgroundColor = '#000';
+        island.classList.remove('shrink');
+      }, 200);
+    }
+  </script>
+</body>
+</html>
