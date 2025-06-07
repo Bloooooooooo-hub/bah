@@ -8,7 +8,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: #cfa0a0;
+      background:;
       color: #fff;
       font-family: Arial, sans-serif;
     }
@@ -28,8 +28,8 @@
     .section:nth-child(2) { background: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0") center/cover no-repeat; }
     .section:nth-child(3) { background: url("https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0") center/cover no-repeat; }
 
-    .section:nth-child(2) { background: #38893e; }
-    .section:nth-child(3) { background: #8645322b; }
+    .section:nth-child(2) { background: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0") center/cover no-repeat;  }
+    .section:nth-child(3) { background: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0") center/cover no-repeat;  }
 
     #dyn-island {
       position: fixed;
@@ -84,10 +84,10 @@
 </head>
 <body>
   <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
-  <section class="section" data-text="Section 1" data-color="#1E88E5">Section 1</section>
+  <section class="section" data-text="Section 1" data-color="">Section 1</section>
 
-  <section class="section" data-text="Section 2" data-color="#43A047">Section 2</section>
-  <section class="section" data-text="Section 3" data-color="#F4511E">Section 3</section>
+  <section class="section" data-text="Section 2" data-color="">Section 2</section>
+  <section class="section" data-text="Section 3" data-color="">Section 3</section>
   <script>
     const dynIsland = document.getElementById('dyn-island');
     const sections = document.querySelectorAll('.section');
