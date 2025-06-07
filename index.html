@@ -53,13 +53,14 @@
       transform: translateX(-50%);
       background: #000;
       color: #fff;
-      padding: 10px 24px;
+      width: 220px;
+      height: 32px;
       border-radius: 32px;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       pointer-events: auto;
       z-index: 1000;
-      display: flex;
+
       align-items: center;
       gap: 12px;
       overflow: hidden;
@@ -93,12 +94,79 @@
 
     #dyn-menu a:hover {
       text-decoration: underline;
+
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+
+      transition: width 2s ease, height 2s ease;
+      animation: shake-uniform 3s linear infinite;
+    }
+    #dyn-island:hover {
+      width: 300px;
+      height: 160px;
+
+
+      align-items: center;
+      gap: 12px;
+
+      transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
+      animation: shake-uniform 3s linear infinite;
+
+
     }
     @keyframes shake-uniform {
       0%,80%,100% { transform: translateX(-50%); }
       83% { transform: translateX(calc(-50% - 2px)); }
       88% { transform: translateX(calc(-50% + 2px)); }
       93% { transform: translateX(calc(-50% - 2px)); }
+
+    }
+
+    #dyn-menu {
+      display: flex;
+
+      flex-direction: column;
+      gap: 4px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+
+      transition: max-height 2s ease, opacity 0.5s ease;
+
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+
+    }
+
+    #dyn-island:hover #dyn-menu {
+      max-height: 200px;
+      opacity: 1;
+
+      gap: 8px;
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+
+    #dyn-island:hover #dyn-menu {
+      opacity: 1;
+      transform: scaleX(1);
+
+
+    }
+
+    #dyn-menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 4px 8px;
+    }
+
+    #dyn-menu a:hover {
+      text-decoration: underline;
+
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
@@ -119,13 +187,27 @@
   </style>
 </head>
 <body>
+
   <div id="dyn-island"><span id="dyn-text">Bah Lo&iuml;c-Emmanuel / Section 1</span>
     <div id="dyn-menu">
+
+  <div id="dyn-island">
+
+    <span id="dyn-text">Bah Lo&iuml;c-Emmanuel</span>
+
+    <span id="dyn-text">Bah Lo&iuml;c-Emmanuel / Section 1</span>
+
+    <nav id="dyn-menu">
+
       <a href="#">Bio</a>
       <a href="#">Parcours</a>
       <a href="#">Passions</a>
       <a href="#">Téléchargement</a>
+
     </div>
+
+    </nav>
+
   </div>
   <section class="section" data-text="Présente" data-color="">Bonjour & Bienvenue </section>
 
