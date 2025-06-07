@@ -53,20 +53,55 @@
       transform: translateX(-50%);
       background: #000;
       color: #fff;
-      padding: 10px 24px;
+      width: 220px;
+      height: 32px;
       border-radius: 32px;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      pointer-events: none;
+      pointer-events: auto;
       z-index: 1000;
-      transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
-      animation: shake-uniform 0.5s linear infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+      transition: width 2s ease, height 2s ease;
+      animation: shake-uniform 3s linear infinite;
+    }
+    #dyn-island:hover {
+      width: 300px;
+      height: 160px;
     }
     @keyframes shake-uniform {
-      0%,100% { transform: translateX(-50%); }
-      25% { transform: translateX(calc(-50% - 2px)); }
-      50% { transform: translateX(calc(-50% + 2px)); }
-      75% { transform: translateX(calc(-50% - 2px)); }
+      0%,80%,100% { transform: translateX(-50%); }
+      83% { transform: translateX(calc(-50% - 2px)); }
+      88% { transform: translateX(calc(-50% + 2px)); }
+      93% { transform: translateX(calc(-50% - 2px)); }
+    }
+
+    #dyn-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 2s ease, opacity 0.5s ease;
+    }
+
+    #dyn-island:hover #dyn-menu {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    #dyn-menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 4px 8px;
+    }
+
+    #dyn-menu a:hover {
+      text-decoration: underline;
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
@@ -87,7 +122,15 @@
   </style>
 </head>
 <body>
-  <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <div id="dyn-island">
+    <span id="dyn-text">Bah Lo&iuml;c-Emmanuel</span>
+    <nav id="dyn-menu">
+      <a href="#">Bio</a>
+      <a href="#">Parcours</a>
+      <a href="#">Passions</a>
+      <a href="#">Téléchargement</a>
+    </nav>
+  </div>
   <section class="section" data-text="Présente" data-color="">Bonjour & Bienvenue </section>
 
   <section class="section" data-text="& son Parcours" data-color="">Section 2</section>
@@ -98,6 +141,7 @@
 
   <script>
     const dynIsland = document.getElementById('dyn-island');
+    const dynText = document.getElementById('dyn-text');
     const sections = document.querySelectorAll('.section');
     const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
@@ -119,7 +163,7 @@
       const text = section.dataset.text;
       dynIsland.classList.add('shrink');
       setTimeout(() => {
-        dynIsland.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        dynText.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
         dynIsland.style.backgroundColor = '';
         dynIsland.classList.remove('shrink');
       }, 400);
