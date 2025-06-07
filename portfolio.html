@@ -8,40 +8,45 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: #000;
+
       color: #fff;
       font-family: Arial, sans-serif;
     }
     .section {
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-    }
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      }
+      
+      /* Section 1 (correctement ciblée) */
+      .section:nth-of-type(1) {
+        background-image: url("https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true");
+      }
+      
+      /* Section 2 */
+      .section:nth-of-type(2) {
+        background-image: url("ba.jpg");
+      }
+      
+      /* Section 3 */
+      .section:nth-of-type(3) {
+        background-image: url("aa.jpg");
+      }
+      
+      /* Section 4 */
+      .section:nth-of-type(4) {
+        background-image: url("ba.jpg");
+      }
+      
 
-    .section:nth-child(1),
-    .section:nth-child(2),
-    .section:nth-child(3) {
-      background-image: url('https://images.unsplash.com/photo-1728750002011-e81fc6a631a9?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    }
-
-    .section:nth-child(1) {
-      background-image: url('https://github.com/Bloooooooooo-hub/bah/blob/preprod/alex-gruber-DiPzOgyqcsA-unsplash.jpg?raw=true');
-    }
-    .section:nth-child(2) {
-      background-image: url('https://source.unsplash.com/random/1600x900/?workspace');
-    }
-    .section:nth-child(3) {
-      background-image: url('https://source.unsplash.com/random/1600x900/?technology');
-    }
-
-    #island {
+    #dyn-island {
       position: fixed;
       top: 20px;
       left: 50%;
@@ -55,73 +60,68 @@
       pointer-events: none;
       z-index: 1000;
       transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
+      animation: shake-uniform 0.5s linear infinite;
     }
-    @keyframes shake {
-      0% { transform: translateX(-50%) rotate(0deg); }
-      20% { transform: translateX(calc(-50% - 10px)) rotate(-5deg); }
-      40% { transform: translateX(calc(-50% + 10px)) rotate(5deg); }
-      60% { transform: translateX(calc(-50% - 10px)) rotate(-5deg); }
-      80% { transform: translateX(calc(-50% + 10px)) rotate(5deg); }
-      100% { transform: translateX(-50%) rotate(0deg); }
+    @keyframes shake-uniform {
+      0%,100% { transform: translateX(-50%); }
+      25% { transform: translateX(calc(-50% - 2px)); }
+      50% { transform: translateX(calc(-50% + 2px)); }
+      75% { transform: translateX(calc(-50% - 2px)); }
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-    #island.shake {
-      animation: shake 0.6s;
-    }
-    #separator {
-      height: 100px;
-      width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255,255,255,0.3);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    #island.shrink {
+    
+    
+
+    
+    #dyn-island.shrink {
       transform: translateX(-50%) scale(0.3);
       opacity: 0.5;
+    }
+
+    body.zoom {
+      transform: scale(1.05);
+      transition: transform 0.5s ease;
     }
   </style>
 </head>
 <body>
-  <div id="island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
-  <section class="section" data-text="Section 1" data-color="#1E88E5">Section 1</section>
-  <div id="separator"><div class="spinner"></div></div>
-  <section class="section" data-text="Section 2" data-color="#43A047">Section 2</section>
-  <section class="section" data-text="Section 3" data-color="#F4511E">Section 3</section>
+  <div id="dyn-island">Bah Lo&iuml;c-Emmanuel / Section 1</div>
+  <section class="section" data-text="Présente" data-color="">Bonjour & Bienvenue </section>
+
+  <section class="section" data-text="& son Parcours" data-color="">Section 2</section>
+
+  <section class="section" data-text="& ses infos " data-color="">Section 3</section>
+  <section class="section" data-text="& son Parcours" data-color="">Section 4</section>
+
+
   <script>
-    const island = document.getElementById('island');
+    const dynIsland = document.getElementById('dyn-island');
     const sections = document.querySelectorAll('.section');
     const options = { threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           changeIsland(entry.target);
+          triggerZoom();
         }
       });
     }, options);
     sections.forEach(sec => observer.observe(sec));
 
-    setInterval(() => {
-      island.classList.add('shake');
-      setTimeout(() => island.classList.remove('shake'), 600);
-    }, 2000);
+    function triggerZoom() {
+      document.body.classList.add('zoom');
+      setTimeout(() => document.body.classList.remove('zoom'), 500);
+    }
 
     function changeIsland(section) {
       const text = section.dataset.text;
-      island.classList.add('shrink');
+      dynIsland.classList.add('shrink');
       setTimeout(() => {
-        island.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
-        island.style.backgroundColor = '#000';
-        island.classList.remove('shrink');
+        dynIsland.textContent = `Bah Lo\u00efc-Emmanuel / ${text}`;
+        dynIsland.style.backgroundColor = '';
+        dynIsland.classList.remove('shrink');
       }, 400);
     }
   </script>
